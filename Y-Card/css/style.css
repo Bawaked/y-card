@@ -1,0 +1,330 @@
+/* ==========================================================
+   Y-CARD — style.css
+   نظام التصميم الأساسي: Variables, Typography, Layout
+   الفلسفة: Apple HIG + Glassmorphism + Neo-Minimalism
+   ========================================================== */
+
+/* ---------- 1. Design Tokens ---------- */
+:root {
+  /* Colors */
+  --color-bg: #09090B;
+  --color-card: #18181B;
+  --color-card-hover: #1F1F23;
+  --color-primary: #3B82F6;
+  --color-primary-pressed: #2563EB;
+  --color-text: #FAFAFA;
+  --color-text-secondary: #A1A1AA;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.14);
+
+  /* Typography */
+  --font-en: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-ar: 'Cairo', 'IBM Plex Sans Arabic', -apple-system, sans-serif;
+
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-card: 20px;
+  --radius-btn: 18px;
+  --radius-profile: 50%;
+
+  /* Shadows */
+  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.28);
+  --shadow-medium: 0 10px 34px rgba(0, 0, 0, 0.4);
+  --shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 28px rgba(0, 0, 0, 0.35);
+
+  /* Motion */
+  --duration-fast: 250ms;
+  --duration-medium: 300ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --card-max-width: 460px;
+  --page-padding: 24px;
+}
+
+/* ---------- 2. Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-en);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+html[lang="ar"] body {
+  font-family: var(--font-ar);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ---------- 3. Landing Page (Language Select) ---------- */
+.landing-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--page-padding);
+  overflow: hidden;
+}
+
+.language-select {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+  width: 100%;
+  max-width: 420px;
+}
+
+.language-select__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+  font-family: var(--font-en);
+  letter-spacing: -0.01em;
+}
+
+.language-select__options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.lang-option {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  padding: 18px 24px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-btn);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text);
+  box-shadow: var(--shadow-soft);
+}
+
+.lang-option[lang="ar"] {
+  font-family: var(--font-ar);
+}
+
+.lang-option[lang="en"] {
+  font-family: var(--font-en);
+}
+
+/* ---------- 4. Card Page (ar.html / en.html) ---------- */
+.card-page-body {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--card-max-width);
+  padding: 56px var(--page-padding) 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Profile image */
+.profile-image-wrapper {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  border-radius: var(--radius-profile);
+  padding: 5px;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.55),
+    rgba(255, 255, 255, 0.08) 40%,
+    rgba(59, 130, 246, 0.35)
+  );
+  box-shadow: var(--shadow-medium);
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-profile);
+  border: 3px solid var(--color-bg);
+}
+
+.name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+
+.job-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin: 0 0 18px;
+}
+
+.email-link {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border-strong);
+  padding-bottom: 2px;
+  margin-bottom: 28px;
+}
+
+/* Add to Contacts button */
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: var(--radius-btn);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btn--primary {
+  /* استُخدم primary-pressed (الأغمق) كخلفية أساسية بدل primary، لأن
+     الأبيض فوق primary العادي يعطي تباينًا 3.52 فقط (دون حد WCAG AA
+     للنص العادي 4.5). primary-pressed يرفعه إلى 4.95 دون إضافة لون جديد. */
+  background: var(--color-primary-pressed);
+  color: #FAFAFA;
+  box-shadow: var(--shadow-soft);
+}
+
+.btn__icon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.btn--add-contact {
+  margin-bottom: 28px;
+}
+
+/* Contact / social cards */
+.contact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 36px;
+}
+
+.contact-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 18px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-glass);
+  text-align: start;
+}
+
+.contact-card__icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.contact-card__text {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.contact-card__title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.contact-card__desc {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.contact-card__arrow {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+}
+
+/* Language switch footer */
+.language-switch {
+  width: 100%;
+}
+
+.lang-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  padding: 14px 28px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-btn);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+/* Aurora background container (blobs animated in animations.css) */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--color-bg);
+  pointer-events: none;
+}
